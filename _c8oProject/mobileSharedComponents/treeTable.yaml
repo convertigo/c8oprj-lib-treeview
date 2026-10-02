@@ -1,0 +1,1067 @@
+comment: |
+  'TreeTable shared component wrapping PrimeNG TreeTable v20.
+  
+  Features:
+  - [x] Hierarchical data display (TreeNode[] with children)
+  - [x] Expand/collapse nodes
+  - [x] Single or multiple selection (row click or checkbox)
+  - [x] Column sorting (single or multiple)
+  - [x] Client-side filtering (global or per column)
+  - [x] Pagination
+  - [x] Scrollable with fixed height or flex
+  - [x] Virtual scroll for large datasets
+  - [x] Resizable/reorderable columns
+  - [x] Lazy loading mode
+  - [x] Frozen columns
+  - [x] Row hover, gridlines, auto layout
+  - [x] Loading state with mask
+  - [x] All TreeTable output events
+  
+  Based on PrimeNG 20.1.0 (Angular 20). Documentation: https://primeng.org/treetable'
+scriptContent: 
+  - xmlizable: 
+    - ↑classname: com.twinsoft.convertigo.beans.common.FormatedContent
+    - com.twinsoft.convertigo.beans.common.FormatedContent: 
+      →: |
+        /*Begin_c8o_CompImport*/
+        /*End_c8o_CompImport*/
+        /*Begin_c8o_CompDeclaration*/
+        	/*End_c8o_CompDeclaration*/
+        /*Begin_c8o_CompConstructor*/
+        		/*End_c8o_CompConstructor*/
+        /*Begin_c8o_CompInitialization*/
+        		/*End_c8o_CompInitialization*/
+        /*Begin_c8o_CompFinalization*/
+        		/*End_c8o_CompFinalization*/
+        /*Begin_c8o_CompChanges*/
+        		/*End_c8o_CompChanges*/
+        /*Begin_c8o_CompDoCheck*/
+        		/*End_c8o_CompDoCheck*/
+        /*Begin_c8o_CompAfterContentInit*/
+        		/*End_c8o_CompAfterContentInit*/
+        /*Begin_c8o_CompAfterContentChecked*/
+        		/*End_c8o_CompAfterContentChecked*/
+        /*Begin_c8o_CompAfterViewInit*/
+        		/*End_c8o_CompAfterViewInit*/
+        /*Begin_c8o_CompAfterViewChecked*/
+        		/*End_c8o_CompAfterViewChecked*/
+        /*Begin_c8o_CompFunction*/
+        	/*End_c8o_CompFunction*/
+        
+↓value [ngx.components.UICompVariable-1790919124414]: 
+  comment: 'Array of TreeNode objects (hierarchical data). Node shape: {data: {...}, children: [...], expanded: bool}'
+  value: '[]'
+↓columns [ngx.components.UICompVariable-1790919129533]: 
+  comment: 'Array of column objects. Column shape: {header: ''Name'', field: ''name'', sortable: true, filterable: true, width: ''auto'', align: ''left'', expander: true}'
+  value: '[]'
+↓selectionMode [ngx.components.UICompVariable-1790919130259]: 
+  comment: 'Selection mode: ''single'', ''multiple'' or null for no selection'
+  value: null
+↓selection [ngx.components.UICompVariable-1790919130985]: 
+  autoEmit: true
+  comment: 'Selected row(s): TreeTableNode in single mode, TreeTableNode[] in multiple mode'
+  value: null
+↓dataKey [ngx.components.UICompVariable-1790919131711]: 
+  comment: A property to uniquely identify a record in data
+  value: null
+↓metaKeySelection [ngx.components.UICompVariable-1790919132437]: 
+  comment: Whether metaKey (ctrl/cmd) should be considered for selection. Default false
+  value: false
+↓compareSelectionBy [ngx.components.UICompVariable-1790919133163]: 
+  comment: 'Algorithm to define if a row is selected: ''equals'' or ''deepEquals''. Default ''deepEquals'''
+  value: '''deepEquals'''
+↓rowHover [ngx.components.UICompVariable-1790919133889]: 
+  comment: Adds hover effect to rows. Default true
+  value: true
+↓loading [ngx.components.UICompVariable-1790919134615]: 
+  comment: Displays a loader to indicate data load in progress
+  value: false
+↓showLoader [ngx.components.UICompVariable-1790919135341]: 
+  comment: Whether to show the loading mask when loading is true. Default true
+  value: true
+↓paginator [ngx.components.UICompVariable-1790919139680]: 
+  comment: When true, enables pagination. Default false
+  value: false
+↓rows [ngx.components.UICompVariable-1790919140406]: 
+  comment: Number of rows to display per page (paginator)
+  value: null
+↓first [ngx.components.UICompVariable-1790919141132]: 
+  comment: Index of the first row to be displayed (paginator)
+  value: 0
+↓rowsPerPageOptions [ngx.components.UICompVariable-1790919141858]: 
+  comment: Array of integer values for rows per page dropdown, e.g. [10,20,50]
+  value: null
+↓paginatorPosition [ngx.components.UICompVariable-1790919142584]: 
+  comment: 'Position of the paginator: ''top'', ''bottom'' or ''both''. Default ''bottom'''
+  value: '''bottom'''
+↓alwaysShowPaginator [ngx.components.UICompVariable-1790919143310]: 
+  comment: Whether to show the paginator even if there is only one page. Default true
+  value: true
+↓showCurrentPageReport [ngx.components.UICompVariable-1790919144036]: 
+  comment: Whether to display the current page report. Default false
+  value: false
+↓currentPageReportTemplate [ngx.components.UICompVariable-1790919144762]: 
+  comment: 'Template of the current page report. Placeholders: {currentPage},{totalPages},{rows},{first},{last},{totalRecords}'
+  value: '''{currentPage} of {totalPages}'''
+↓sortMode [ngx.components.UICompVariable-1790919145488]: 
+  comment: 'Sorting mode: ''single'' or ''multiple''. Default ''single'''
+  value: '''single'''
+↓sortField [ngx.components.UICompVariable-1790919146214]: 
+  comment: Name of the field to sort data by default
+  value: null
+↓sortOrder [ngx.components.UICompVariable-1790919146940]: 
+  comment: 'Order to sort when default sorting is enabled: 1 ascending, -1 descending'
+  value: null
+↓multiSortMeta [ngx.components.UICompVariable-1790919147666]: 
+  comment: 'Array of SortMeta objects to sort by default in multiple mode: [{field:''name'', order:1}]'
+  value: null
+↓defaultSortOrder [ngx.components.UICompVariable-1790919148392]: 
+  comment: 'Sort order used when an unsorted column is sorted by user interaction: 1 or -1. Default 1'
+  value: 1
+↓customSort [ngx.components.UICompVariable-1790919149118]: 
+  comment: Whether to use a custom sort via the SortFunction event instead of the default. Default false
+  value: false
+↓globalFilter [ngx.components.UICompVariable-1790919149870]: 
+  comment: Value bound to the TreeTable global filter input (client-side global filtering). Use with globalFilterFields
+  value: null
+↓globalFilterFields [ngx.components.UICompVariable-1790919150596]: 
+  comment: Array of field names as string to use in global filtering
+  value: null
+↓filters [ngx.components.UICompVariable-1790919151322]: 
+  comment: 'Array of FilterMetadata objects to provide external filters: {field: {value: x, matchMode: ''contains''}}'
+  value: null
+↓filterMode [ngx.components.UICompVariable-1790919152048]: 
+  comment: 'Mode for filtering: ''lenient'' or ''strict''. Default ''lenient'''
+  value: '''lenient'''
+↓filterDelay [ngx.components.UICompVariable-1790919152774]: 
+  comment: Delay in milliseconds before filtering the data. Default 300
+  value: 300
+↓filterLocale [ngx.components.UICompVariable-1790919153500]: 
+  comment: Locale to use in filtering
+  value: undefined
+↓scrollable [ngx.components.UICompVariable-1790919154226]: 
+  comment: When specified, enables horizontal and/or vertical scrolling
+  value: false
+↓scrollHeight [ngx.components.UICompVariable-1790919154952]: 
+  comment: Height of the scroll viewport in fixed pixels or the 'flex' keyword for dynamic size
+  value: null
+↓virtualScroll [ngx.components.UICompVariable-1790919155678]: 
+  comment: Whether the data should be loaded on demand during scroll. Default false
+  value: false
+↓virtualScrollItemSize [ngx.components.UICompVariable-1790919156404]: 
+  comment: Height of a row to use in calculations of virtual scrolling. Default 28
+  value: null
+↓virtualScrollDelay [ngx.components.UICompVariable-1790919157130]: 
+  comment: Delay in ms before triggering the virtual scroll. Default 150
+  value: 150
+↓resizableColumns [ngx.components.UICompVariable-1790919157856]: 
+  comment: When enabled, columns can be resized using drag and drop. Default false
+  value: false
+↓columnResizeMode [ngx.components.UICompVariable-1790919158582]: 
+  comment: 'Whether the overall table width should change on column resize: ''fit'' or ''expand''. Default ''fit'''
+  value: '''fit'''
+↓reorderableColumns [ngx.components.UICompVariable-1790919159308]: 
+  comment: When enabled, columns can be reordered using drag and drop. Default false
+  value: false
+↓showGridlines [ngx.components.UICompVariable-1790919160034]: 
+  comment: Whether to show grid lines between cells. Default false
+  value: false
+↓autoLayout [ngx.components.UICompVariable-1790919160760]: 
+  comment: Whether the cell widths scale according to their content. Default false
+  value: false
+↓frozenWidth [ngx.components.UICompVariable-1790919161512]: 
+  comment: Width of the frozen columns container, e.g. '200px'
+  value: null
+↓frozenColumns [ngx.components.UICompVariable-1790919162238]: 
+  comment: Array of column objects that are frozen (same shape as columns)
+  value: null
+↓contextMenuSelection [ngx.components.UICompVariable-1790919162964]: 
+  comment: Selected row with a context menu
+  value: null
+↓contextMenuSelectionMode [ngx.components.UICompVariable-1790919163690]: 
+  comment: 'Mode of the context menu selection: ''separate'' or ''joint''. Default ''separate'''
+  value: '''separate'''
+↓tableStyle [ngx.components.UICompVariable-1790919164416]: 
+  comment: 'Inline style object of the table, e.g. {width: ''100%''}'
+  value: null
+↓tableStyleClass [ngx.components.UICompVariable-1790919165142]: 
+  comment: Style class of the table element
+  value: null
+↓styleClass [ngx.components.UICompVariable-1790919165868]: 
+  comment: Style class of the component root element
+  value: null
+↓resetPageOnSort [ngx.components.UICompVariable-1790919166594]: 
+  comment: When true, resets the paginator to first page after sorting. Default true
+  value: true
+↓pageLinks [ngx.components.UICompVariable-1790919167320]: 
+  comment: Number of page links to display in the paginator. Default 5
+  value: 5
+↓rowTrackBy [ngx.components.UICompVariable-1790919168046]: 
+  comment: Function to optimize dom operations by delegating to ngForTrackBy
+  value: null
+↓paginatorLocale [ngx.components.UICompVariable-1790919168772]: 
+  comment: Locale to be used in paginator formatting
+  value: undefined
+↓showPageLinks [ngx.components.UICompVariable-1790919169498]: 
+  comment: Whether to show page links in paginator. Default true
+  value: true
+↓showFirstLastIcon [ngx.components.UICompVariable-1790919170224]: 
+  comment: When enabled, first and last page icons are displayed in paginator. Default true
+  value: true
+↓showJumpToPageDropdown [ngx.components.UICompVariable-1790919170950]: 
+  comment: Whether to display a dropdown to navigate to any page. Default false
+  value: false
+↓totalRecords [ngx.components.UICompVariable-1790919171676]: 
+  comment: Number of total records, defaults to length of value when not defined (lazy mode)
+  value: undefined
+↓emptyMessage [ngx.components.UICompVariable-1790919172402]: 
+  comment: Text shown when there is no data to display. Default 'No records found'
+  value: '''Aucun enregistrement'''
+↓NodeSelect [ngx.components.UICompEvent-1790919173154]: 
+  attrName: NodeSelect
+  comment: 'Fired when a node is selected (row click in selectionMode). Data: TreeTableNode'
+↓NodeUnselect [ngx.components.UICompEvent-1790919173880]: 
+  attrName: NodeUnselect
+  comment: 'Fired when a node is unselected. Data: {originalEvent, node, type}'
+↓NodeExpand [ngx.components.UICompEvent-1790919174606]: 
+  attrName: NodeExpand
+  comment: 'Fired when a node is expanded. Data: {originalEvent, node}'
+↓NodeCollapse [ngx.components.UICompEvent-1790919175332]: 
+  attrName: NodeCollapse
+  comment: 'Fired when a node is collapsed. Data: {originalEvent, node}'
+↓SelectionChange [ngx.components.UICompEvent-1790919176058]: 
+  attrName: SelectionChange
+  comment: 'Fired on selection change. Data: selected node(s)'
+↓Page [ngx.components.UICompEvent-1790919176784]: 
+  attrName: Page
+  comment: 'Fired when pagination occurs. Data: TreeTablePaginatorState {page, first, rows, pageCount}'
+↓Sort [ngx.components.UICompEvent-1790919177510]: 
+  attrName: Sort
+  comment: 'Fired when a column gets sorted. Data: sort event {data, mode, field, order, multiSortMeta}'
+↓SortFunction [ngx.components.UICompEvent-1790919178236]: 
+  attrName: SortFunction
+  comment: Custom sort event when customSort=true. Implement custom sorting in the page handler
+↓Filter [ngx.components.UICompEvent-1790919178962]: 
+  attrName: Filter
+  comment: 'Fired when data is filtered. Data: {filters, filteredValue}'
+↓LazyLoad [ngx.components.UICompEvent-1790919179688]: 
+  attrName: LazyLoad
+  comment: 'Fired when paging, sorting or filtering happens in lazy mode. Data: TreeTableLazyLoadEvent'
+↓ColResize [ngx.components.UICompEvent-1790919180414]: 
+  attrName: ColResize
+  comment: 'Fired when a column is resized. Data: {element, delta}'
+↓ColReorder [ngx.components.UICompEvent-1790919181140]: 
+  attrName: ColReorder
+  comment: 'Fired when a column is reordered. Data: {dragIndex, dropIndex, columns}'
+↓ContextMenuSelect [ngx.components.UICompEvent-1790919181866]: 
+  attrName: ContextMenuSelect
+  comment: 'Fired when a node is selected with right click. Data: {originalEvent, node}'
+↓HeaderCheckboxToggle [ngx.components.UICompEvent-1790919182592]: 
+  attrName: HeaderCheckboxToggle
+  comment: 'Fired when state of header checkbox changes. Data: {originalEvent, checked}'
+↓EditInit [ngx.components.UICompEvent-1790919183318]: 
+  attrName: EditInit
+  comment: 'Fired when a cell switches to edit mode. Data: {field, data}'
+↓EditComplete [ngx.components.UICompEvent-1790919184044]: 
+  attrName: EditComplete
+  comment: 'Fired when cell edit is completed. Data: {field, data}'
+↓EditCancel [ngx.components.UICompEvent-1790919184770]: 
+  attrName: EditCancel
+  comment: 'Fired when cell edit is cancelled with escape key. Data: {field, data}'
+↓Tag [ngx.components.UIElement-1790919185538]: 
+  identifier: tt
+  tagName: p-treetable
+  ↓A_value [ngx.components.UIAttribute-1790919186240]: 
+    attrName: '[value]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.value
+  ↓A_columns [ngx.components.UIAttribute-1790919186242]: 
+    attrName: '[columns]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.columns
+  ↓A_selectionMode [ngx.components.UIAttribute-1790919186244]: 
+    attrName: '[selectionMode]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.selectionMode
+  ↓A_selection [ngx.components.UIAttribute-1790919186246]: 
+    attrName: '[(selection)]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.selection
+  ↓A_dataKey [ngx.components.UIAttribute-1790919186248]: 
+    attrName: '[dataKey]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.dataKey
+  ↓A_metaKeySelection [ngx.components.UIAttribute-1790919186250]: 
+    attrName: '[metaKeySelection]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.metaKeySelection
+  ↓A_compareSelectionBy [ngx.components.UIAttribute-1790919186252]: 
+    attrName: '[compareSelectionBy]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.compareSelectionBy
+  ↓A_rowHover [ngx.components.UIAttribute-1790919186254]: 
+    attrName: '[rowHover]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.rowHover
+  ↓A_loading [ngx.components.UIAttribute-1790919188937]: 
+    attrName: '[loading]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.loading
+  ↓A_showLoader [ngx.components.UIAttribute-1790919189639]: 
+    attrName: '[showLoader]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.showLoader
+  ↓A_lazy [ngx.components.UIAttribute-1790919190341]: 
+    attrName: '[lazy]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.lazy
+  ↓A_lazyLoadOnInit [ngx.components.UIAttribute-1790919191043]: 
+    attrName: '[lazyLoadOnInit]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.lazyLoadOnInit
+  ↓A_paginator [ngx.components.UIAttribute-1790919191745]: 
+    attrName: '[paginator]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.paginator
+  ↓A_rows [ngx.components.UIAttribute-1790919192447]: 
+    attrName: '[rows]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.rows
+  ↓A_first [ngx.components.UIAttribute-1790919193149]: 
+    attrName: '[first]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.first
+  ↓A_rowsPerPageOptions [ngx.components.UIAttribute-1790919193851]: 
+    attrName: '[rowsPerPageOptions]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.rowsPerPageOptions
+  ↓A_paginatorPosition [ngx.components.UIAttribute-1790919194553]: 
+    attrName: '[paginatorPosition]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.paginatorPosition
+  ↓A_alwaysShowPaginator [ngx.components.UIAttribute-1790919195255]: 
+    attrName: '[alwaysShowPaginator]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.alwaysShowPaginator
+  ↓A_showCurrentPageReport [ngx.components.UIAttribute-1790919195957]: 
+    attrName: '[showCurrentPageReport]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.showCurrentPageReport
+  ↓A_currentPageReportTemplate [ngx.components.UIAttribute-1790919196659]: 
+    attrName: '[currentPageReportTemplate]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.currentPageReportTemplate
+  ↓A_sortMode [ngx.components.UIAttribute-1790919197361]: 
+    attrName: '[sortMode]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.sortMode
+  ↓A_customSort [ngx.components.UIAttribute-1790919198063]: 
+    attrName: '[customSort]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.customSort
+  ↓A_defaultSortOrder [ngx.components.UIAttribute-1790919198765]: 
+    attrName: '[defaultSortOrder]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.defaultSortOrder
+  ↓A_resetPageOnSort [ngx.components.UIAttribute-1790919199467]: 
+    attrName: '[resetPageOnSort]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.resetPageOnSort
+  ↓A_sortField [ngx.components.UIAttribute-1790919200195]: 
+    attrName: '[sortField]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.sortField
+  ↓A_sortOrder [ngx.components.UIAttribute-1790919200897]: 
+    attrName: '[sortOrder]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.sortOrder
+  ↓A_multiSortMeta [ngx.components.UIAttribute-1790919201599]: 
+    attrName: '[multiSortMeta]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.multiSortMeta
+  ↓A_scrollable [ngx.components.UIAttribute-1790919202301]: 
+    attrName: '[scrollable]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.scrollable
+  ↓A_scrollHeight [ngx.components.UIAttribute-1790919203003]: 
+    attrName: '[scrollHeight]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.scrollHeight
+  ↓A_virtualScroll [ngx.components.UIAttribute-1790919203705]: 
+    attrName: '[virtualScroll]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.virtualScroll
+  ↓A_virtualScrollItemSize [ngx.components.UIAttribute-1790919204407]: 
+    attrName: '[virtualScrollItemSize]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.virtualScrollItemSize
+  ↓A_virtualScrollDelay [ngx.components.UIAttribute-1790919205109]: 
+    attrName: '[virtualScrollDelay]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.virtualScrollDelay
+  ↓A_resizableColumns [ngx.components.UIAttribute-1790919205811]: 
+    attrName: '[resizableColumns]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.resizableColumns
+  ↓A_columnResizeMode [ngx.components.UIAttribute-1790919206513]: 
+    attrName: '[columnResizeMode]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.columnResizeMode
+  ↓A_reorderableColumns [ngx.components.UIAttribute-1790919207215]: 
+    attrName: '[reorderableColumns]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.reorderableColumns
+  ↓A_frozenWidth [ngx.components.UIAttribute-1790919207917]: 
+    attrName: '[frozenWidth]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.frozenWidth
+  ↓A_frozenColumns [ngx.components.UIAttribute-1790919208619]: 
+    attrName: '[frozenColumns]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.frozenColumns
+  ↓A_filters [ngx.components.UIAttribute-1790919209321]: 
+    attrName: '[filters]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.filters
+  ↓A_globalFilterFields [ngx.components.UIAttribute-1790919210023]: 
+    attrName: '[globalFilterFields]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.globalFilterFields
+  ↓A_filterMode [ngx.components.UIAttribute-1790919210725]: 
+    attrName: '[filterMode]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.filterMode
+  ↓A_filterDelay [ngx.components.UIAttribute-1790919211453]: 
+    attrName: '[filterDelay]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.filterDelay
+  ↓A_filterLocale [ngx.components.UIAttribute-1790919212155]: 
+    attrName: '[filterLocale]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.filterLocale
+  ↓A_showGridlines [ngx.components.UIAttribute-1790919212857]: 
+    attrName: '[showGridlines]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.showGridlines
+  ↓A_autoLayout [ngx.components.UIAttribute-1790919213559]: 
+    attrName: '[autoLayout]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.autoLayout
+  ↓A_totalRecords [ngx.components.UIAttribute-1790919214261]: 
+    attrName: '[totalRecords]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.totalRecords
+  ↓A_styleClass [ngx.components.UIAttribute-1790919214963]: 
+    attrName: '[styleClass]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.styleClass
+  ↓A_tableStyle [ngx.components.UIAttribute-1790919215665]: 
+    attrName: '[tableStyle]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.tableStyle
+  ↓A_tableStyleClass [ngx.components.UIAttribute-1790919216367]: 
+    attrName: '[tableStyleClass]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.tableStyleClass
+  ↓A_pageLinks [ngx.components.UIAttribute-1790919217069]: 
+    attrName: '[pageLinks]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.pageLinks
+  ↓A_showPageLinks [ngx.components.UIAttribute-1790919217771]: 
+    attrName: '[showPageLinks]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.showPageLinks
+  ↓A_showFirstLastIcon [ngx.components.UIAttribute-1790919218473]: 
+    attrName: '[showFirstLastIcon]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.showFirstLastIcon
+  ↓A_showJumpToPageDropdown [ngx.components.UIAttribute-1790919219175]: 
+    attrName: '[showJumpToPageDropdown]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.showJumpToPageDropdown
+  ↓A_loadingIcon [ngx.components.UIAttribute-1790919219877]: 
+    attrName: '[loadingIcon]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.loadingIcon
+  ↓A_rowTrackBy [ngx.components.UIAttribute-1790919220579]: 
+    attrName: '[rowTrackBy]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.rowTrackBy
+  ↓A_contextMenuSelection [ngx.components.UIAttribute-1790919221281]: 
+    attrName: '[(contextMenuSelection)]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.contextMenuSelection
+  ↓A_paginatorLocale [ngx.components.UIAttribute-1790919221983]: 
+    attrName: '[paginatorLocale]'
+    attrValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+        - MobileSmartSourceType: script:this.paginatorLocale
+  ↓E_nodeExpand [ngx.components.UIControlEvent-1790919222711]: 
+    attrName: (onNodeExpand)
+    eventName: (onNodeExpand)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919222975]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.NodeExpand",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_nodeCollapse [ngx.components.UIControlEvent-1790919223677]: 
+    attrName: (onNodeCollapse)
+    eventName: (onNodeCollapse)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919223941]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.NodeCollapse",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_nodeSelect [ngx.components.UIControlEvent-1790919224643]: 
+    attrName: (onNodeSelect)
+    eventName: (onNodeSelect)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919224907]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.NodeSelect",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_nodeUnselect [ngx.components.UIControlEvent-1790919225609]: 
+    attrName: (onNodeUnselect)
+    eventName: (onNodeUnselect)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919225873]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.NodeUnselect",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_page [ngx.components.UIControlEvent-1790919226575]: 
+    attrName: (onPage)
+    eventName: (onPage)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919226839]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.Page",
+         "data": "script:{event: event, first: event?.first, rows: event?.rows}"
+        }'
+  ↓E_sort [ngx.components.UIControlEvent-1790919227541]: 
+    attrName: (onSort)
+    eventName: (onSort)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919227805]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.Sort",
+         "data": "script:{event: event, field: event?.field, order: event?.order}"
+        }'
+  ↓E_filter [ngx.components.UIControlEvent-1790919228507]: 
+    attrName: (onFilter)
+    eventName: (onFilter)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919228771]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.Filter",
+         "data": "script:{event: event, filters: event?.filters}"
+        }'
+  ↓E_lazyLoad [ngx.components.UIControlEvent-1790919229473]: 
+    attrName: (onLazyLoad)
+    eventName: (onLazyLoad)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919229737]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.LazyLoad",
+         "data": "script:{event: event, first: event?.first, rows: event?.rows}"
+        }'
+  ↓E_colResize [ngx.components.UIControlEvent-1790919230465]: 
+    attrName: (onColResize)
+    eventName: (onColResize)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919230729]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.ColResize",
+         "data": "script:{event: event, element: event?.element, delta: event?.delta}"
+        }'
+  ↓E_colReorder [ngx.components.UIControlEvent-1790919231431]: 
+    attrName: (onColReorder)
+    eventName: (onColReorder)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919231695]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.ColReorder",
+         "data": "script:{event: event, dragIndex: event?.dragIndex, dropIndex: event?.dropIndex}"
+        }'
+  ↓E_contextMenuSelect [ngx.components.UIControlEvent-1790919232397]: 
+    attrName: (onContextMenuSelect)
+    eventName: (onContextMenuSelect)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919232661]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.ContextMenuSelect",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_headerCheckboxToggle [ngx.components.UIControlEvent-1790919233363]: 
+    attrName: (onHeaderCheckboxToggle)
+    eventName: (onHeaderCheckboxToggle)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919233627]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.HeaderCheckboxToggle",
+         "data": "script:{event: event, checked: event?.checked}"
+        }'
+  ↓E_editInit [ngx.components.UIControlEvent-1790919234329]: 
+    attrName: (onEditInit)
+    eventName: (onEditInit)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919234593]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.EditInit",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_editComplete [ngx.components.UIControlEvent-1790919235295]: 
+    attrName: (onEditComplete)
+    eventName: (onEditComplete)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919235559]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.EditComplete",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_editCancel [ngx.components.UIControlEvent-1790919236261]: 
+    attrName: (onEditCancel)
+    eventName: (onEditCancel)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919236525]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.EditCancel",
+         "data": "script:{event: event, node: event?.node}"
+        }'
+  ↓E_sortFunction [ngx.components.UIControlEvent-1790919237227]: 
+    attrName: (sortFunction)
+    eventName: (sortFunction)
+    ↓EmitEvent [ngx.components.UIDynamicEmit-1790919237491]: 
+      beanData: |
+        '{
+         "ionBean": "EmitEventAction",
+         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.SortFunction",
+         "data": "script:{event: event, field: event?.field, order: event?.order}"
+        }'
+  ↓HeaderTemplate [ngx.components.UIElement-1790919257048]: 
+    tagName: ng-template
+    ↓Attr_pTemplate [ngx.components.UIAttribute-1790920489503]: 
+      attrName: pTemplate
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:header
+      comment: PrimeNG template selector for the table header
+    ↓Attr_letColumns [ngx.components.UIAttribute-1790920494832]: 
+      attrName: let-columns
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:
+      comment: Binds $implicit (columns array) to local variable 'columns'
+    ↓ColumnsForEach [ngx.components.UIControlDirective-1790920495534]: 
+      comment: Iterates over dynamic columns to build header cells
+      directiveIndexName: colIndex
+      directiveItemName: col
+      directiveSource: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this.columns
+      ↓Th [ngx.components.UIElement-1790920499293]: 
+        comment: Header cell, sortable, resizable and reorderable, hosts a checkbox column when col.type is checkbox
+        tagName: th
+        ↓Attr_sortable [ngx.components.UIAttribute-1790920504182]: 
+          attrName: '[ttSortableColumn]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.sortable !== false
+          comment: Enables sorting on this column unless col.sortable === false
+        ↓Attr_sortField [ngx.components.UIAttribute-1790920504884]: 
+          attrName: '[ttSortableColumnDisabled]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.sortable === false
+          comment: Disables sorting when the column is not sortable
+        ↓Attr_field [ngx.components.UIAttribute-1790920505586]: 
+          attrName: '[ttSortableColumnField]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.field
+          comment: Sort field for the column
+        ↓Text_headerLabel [ngx.components.UIText-1790920506288]: 
+          comment: Column header label
+          textValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: 'plain:{{col?.type === ''checkbox'' ? '''' : (col?.header || col?.field)}}'
+        ↓Attr_resizable [ngx.components.UIAttribute-1790922784854]: 
+          attrName: '[ttResizableColumn]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.resizable !== false
+          comment: Enables column resizing unless col.resizable is false
+        ↓Attr_reorderable [ngx.components.UIAttribute-1790922785556]: 
+          attrName: '[ttReorderableColumn]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.reorderable === true
+          comment: Enables drag-and-drop column reorder when col.reorderable is true
+        ↓HeaderCheckboxIf [ngx.components.UIControlDirective-1790922786258]: 
+          comment: Renders the header checkbox only on checkbox columns
+          directiveName: If
+          directiveSource: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.type === 'checkbox'
+          ↓HeaderCheckbox [ngx.components.UIElement-1790922788479]: 
+            comment: Select-all checkbox rendered on checkbox columns
+            selfClose: true
+            tagName: p-treeTableHeaderCheckbox
+  ↓BodyTemplate [ngx.components.UIElement-1790920509621]: 
+    comment: 'PrimeNG body template: renders one tr per visible serialized node'
+    tagName: ng-template
+    ↓Attr_pTemplate [ngx.components.UIAttribute-1790920515053]: 
+      attrName: pTemplate
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:body
+      comment: PrimeNG body template selector
+    ↓Attr_letRowNode [ngx.components.UIAttribute-1790920515755]: 
+      attrName: let-rowNode
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:
+      comment: Binds $implicit (serialized row node) to local variable 'rowNode'
+    ↓Attr_letRowData [ngx.components.UIAttribute-1790920516457]: 
+      attrName: let-rowData
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:rowData
+      comment: Binds rowData (node data object) to local variable 'rowData'
+    ↓Attr_letCols [ngx.components.UIAttribute-1790920517159]: 
+      attrName: let-cols
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:columns
+      comment: Binds columns array to local variable 'cols'
+    ↓Tr [ngx.components.UIElement-1790920549103]: 
+      comment: Body row bound to the serialized node via ttRow
+      tagName: tr
+      ↓Attr_ttRow [ngx.components.UIAttribute-1790920554380]: 
+        attrName: '[ttRow]'
+        attrValue: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+            - MobileSmartSourceType: script:rowNode
+        comment: Binds the row to the serialized node (level, expansion state)
+      ↓Attr_selectableRow [ngx.components.UIAttribute-1790920555082]: 
+        attrName: '[ttSelectableRow]'
+        attrValue: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+            - MobileSmartSourceType: script:rowNode
+        comment: Enables row click selection when a selectionMode is set
+      ↓Attr_selectableRowDisabled [ngx.components.UIAttribute-1790920555784]: 
+        attrName: '[ttSelectableRowDisabled]'
+        attrValue: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+            - MobileSmartSourceType: script:!this.selectionMode
+        comment: Disables row selection when no selectionMode is configured
+      ↓CellsForEach [ngx.components.UIControlDirective-1790920556486]: 
+        comment: Iterates columns to build body cells for this row
+        directiveIndexName: colIndex
+        directiveItemName: col
+        directiveSource: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+            - MobileSmartSourceType: script:cols
+        ↓Td [ngx.components.UIElement-1790920559014]: 
+          comment: Body cell for a dynamic column
+          tagName: td
+          ↓TogglerDirective [ngx.components.UIControlDirective-1790920563920]: 
+            comment: Shows the expand/collapse toggler only on the first column
+            directiveName: If
+            directiveSource: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                - MobileSmartSourceType: script:colIndex === 0
+            ↓Toggler [ngx.components.UIElement-1790920569785]: 
+              comment: Expand/collapse toggler for tree nodes
+              identifier: ttToggler
+              selfClose: true
+              tagName: p-treetabletoggler
+              ↓Attr_rowNode [ngx.components.UIAttribute-1790920576230]: 
+                attrName: '[rowNode]'
+                attrValue: 
+                  - xmlizable: 
+                    - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                    - MobileSmartSourceType: script:rowNode
+                comment: Serialized node to toggle
+          ↓Text_cellValue [ngx.components.UIText-1790920564622]: 
+            comment: Cell value for the current column field
+            textValue: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                - MobileSmartSourceType: 'plain:{{col?.type === ''checkbox'' ? '''' : rowData[col?.field]}}'
+          ↓CheckboxIf [ngx.components.UIControlDirective-1790922792320]: 
+            comment: Renders a row checkbox on checkbox columns
+            directiveName: If
+            directiveSource: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                - MobileSmartSourceType: script:col?.type === 'checkbox'
+            ↓RowCheckbox [ngx.components.UIElement-1790922795699]: 
+              comment: Row selection checkbox
+              selfClose: true
+              tagName: p-treetable-checkbox
+              ↓Attr_rowNode [ngx.components.UIAttribute-1790922800312]: 
+                attrName: '[value]'
+                attrValue: 
+                  - xmlizable: 
+                    - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                    - MobileSmartSourceType: script:rowNode
+                comment: Binds the current serialized node to the row checkbox (TTCheckbox input alias is 'value'/'rowNode' via args:['value'])
+  ↓EmptyMessageTemplate [ngx.components.UIElement-1790920510323]: 
+    comment: 'PrimeNG emptymessage template: rendered when the table has no data'
+    tagName: ng-template
+    ↓Attr_pTemplate [ngx.components.UIAttribute-1790920517861]: 
+      attrName: pTemplate
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:emptymessage
+      comment: PrimeNG emptymessage template selector
+    ↓Attr_letCols [ngx.components.UIAttribute-1790920518563]: 
+      attrName: let-cols
+      attrValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:columns
+      comment: Binds columns array to local variable 'cols' for colspan computation
+    ↓Tr [ngx.components.UIElement-1790920576932]: 
+      comment: Empty message row
+      tagName: tr
+      ↓Td [ngx.components.UIElement-1790920582166]: 
+        comment: Empty message cell spanning all columns
+        tagName: td
+        ↓Attr_colspan [ngx.components.UIAttribute-1790920604121]: 
+          attrName: '[colspan]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:(cols?.length || 1)
+          comment: Spans the message across all columns
+        ↓EmptyMessageText [ngx.components.UIText-1790920604823]: 
+          comment: Displays the component emptyMessage input
+          textValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: plain:{{emptyMessage}}
+↓lazy [ngx.components.UICompVariable-1790919437254]: 
+  comment: Defines if lazy loading mode is enabled (load children on expand via onLazyLoad event)
+  value: false
+↓lazyLoadOnInit [ngx.components.UICompVariable-1790919437980]: 
+  comment: Defines if lazy loading is triggered on initialization (only when lazy=true)
+  value: true
+↓loadingIcon [ngx.components.UICompVariable-1790919438706]: 
+  comment: Icon shown on the loading mask when the table is in loading state
+  value: null
+↓SharedComponent_Event [ngx.components.UISharedComponentEvent-1790920778074]: 
+  comment: Registers PrimeNG TreeTable module, theme provider and npm dependencies on the shared component host module
+  ↓Imports [ngx.components.UICustomAction-1790920782596]: 
+    actionValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.FormatedContent
+        - com.twinsoft.convertigo.beans.common.FormatedContent: 
+          →: |
+            '		const primeNgConfig = this.injector.get(PrimeNG);
+                	primeNgConfig.setConfig({ theme: { preset: Aura } });
+            		resolve();
+            '
+    comment: Imports TreeTableModule and provides the Aura theme through providePrimeNG
+    local_module_ng_imports: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: TreeTableModule
+    local_module_ts_imports: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: '{ TreeTableModule }'
+              - java.lang.String: 
+                - ↑value: primeng/treetable
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: '{ PrimeNG }'
+              - java.lang.String: 
+                - ↑value: primeng/config
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: Aura
+              - java.lang.String: 
+                - ↑value: '@primeuix/themes/aura'
+    package_dependencies: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: primeng
+              - java.lang.String: 
+                - ↑value: 20.1.0
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: '@primeuix/themes'
+              - java.lang.String: 
+                - ↑value: 2.0.2

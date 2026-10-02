@@ -1,0 +1,307 @@
+comment: Test page for the lib_TreeTable shared component
+scriptContent: 
+  - xmlizable: 
+    - ↑classname: com.twinsoft.convertigo.beans.common.FormatedContent
+    - com.twinsoft.convertigo.beans.common.FormatedContent: 
+      →: |
+        /*Begin_c8o_PageImport*/
+        /*End_c8o_PageImport*/
+        /*Begin_c8o_PageDeclaration*/
+        	/*End_c8o_PageDeclaration*/
+        /*Begin_c8o_PageConstructor*/
+        		/*End_c8o_PageConstructor*/
+        /*Begin_c8o_PageFunction*/
+        	/*End_c8o_PageFunction*/
+        
+segment: path-to-testtreetable
+title: testTreeTable
+↓Header [ngx.components.UIDynamicElement-1790920827765]: 
+  beanData: '{"ionBean":"Header"}'
+  comment: Page header
+  tagName: ion-header
+  ↓ToolBar [ngx.components.UIDynamicElement-1790920831726]: 
+    beanData: '{"ionBean":"ToolBar"}'
+    comment: Toolbar displaying the page title
+    tagName: ion-toolbar
+    ↓BarTitle [ngx.components.UIDynamicElement-1790920832420]: 
+      beanData: '{"ionBean":"BarTitle"}'
+      comment: Page title
+      tagName: ion-title
+      ↓Text [ngx.components.UIText-1790920836282]: 
+        comment: Page title text
+        textValue: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+            - MobileSmartSourceType: plain:Cas d'usage TreeTable
+↓Content [ngx.components.UIDynamicElement-1790920828443]: 
+  beanData: '{"ionBean":"Content"}'
+  comment: Main content hosting the TreeTable demo
+  tagName: ion-content
+  ↓Case1Title [ngx.components.UIDynamicElement-1790922844100]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of use case 1
+    tagName: h2
+    ↓Text [ngx.components.UIText-1790922848473]: 
+      comment: Use case 1 label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:1. Sélection simple avec tri des colonnes
+  ↓UseSharedTreeTable [ngx.components.UIUseShared-1790920839479]: 
+    comment: Uses the treeTable shared component with demo data
+    identifier: ttDemo
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1790920842973]: 
+      comment: Hierarchical demo data
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeData
+    ↓columns [ngx.components.UIUseVariable-1790920843691]: 
+      comment: Demo column definitions
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeColumns
+    ↓selectionMode [ngx.components.UIUseVariable-1790920844409]: 
+      comment: Enables row selection on the demo table
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:'single'
+  ↓Case2Title [ngx.components.UIDynamicElement-1790922851961]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of use case 2
+    tagName: h2
+    ↓Text [ngx.components.UIText-1790922855346]: 
+      comment: Use case 2 label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:2. Sélection multiple par cases à cocher
+  ↓UseSharedCheckbox [ngx.components.UIUseShared-1790922858639]: 
+    comment: 'Use case 2: multiple selection with checkboxes'
+    identifier: ttCheckbox
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1790922863291]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeData
+    ↓columns [ngx.components.UIUseVariable-1790922864009]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.checkboxColumns
+    ↓selectionMode [ngx.components.UIUseVariable-1790922864727]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:'checkbox'
+    ↓showGridlines [ngx.components.UIUseVariable-1790922865445]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:true
+  ↓Case3Title [ngx.components.UIDynamicElement-1790922866915]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of use case 3
+    tagName: h2
+    ↓Text [ngx.components.UIText-1790922870468]: 
+      comment: Use case 3 label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:3. Pagination avec 2 dossiers par page et défilement fixe
+  ↓UseSharedPaged [ngx.components.UIUseShared-1790922874299]: 
+    comment: 'Use case 3: paginator with fixed scroll height'
+    identifier: ttPaged
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1790922880112]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeData
+    ↓columns [ngx.components.UIUseVariable-1790922880830]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.pagedColumns
+    ↓paginator [ngx.components.UIUseVariable-1790922881548]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:true
+    ↓rows [ngx.components.UIUseVariable-1790922882266]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:2
+    ↓rowsPerPageOptions [ngx.components.UIUseVariable-1790922882984]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:[2, 5, 10]
+    ↓scrollable [ngx.components.UIUseVariable-1790922883702]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:true
+    ↓scrollHeight [ngx.components.UIUseVariable-1790922884420]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:'260px'
+  ↓Case4Title [ngx.components.UIDynamicElement-1790922885588]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of use case 4
+    tagName: h2
+    ↓Text [ngx.components.UIText-1790922887466]: 
+      comment: Use case 4 label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:4. Colonnes redimensionnables et réordonnables par glisser-déposer
+  ↓UseSharedResize [ngx.components.UIUseShared-1790922891634]: 
+    comment: 'Use case 4: resizable and reorderable columns'
+    identifier: ttResize
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1790922896004]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeData
+    ↓columns [ngx.components.UIUseVariable-1790922896722]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.reorderColumns
+    ↓resizableColumns [ngx.components.UIUseVariable-1790922897440]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:true
+    ↓reorderableColumns [ngx.components.UIUseVariable-1790922898158]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:true
+  ↓Case5Title [ngx.components.UIDynamicElement-1790922899775]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of use case 5
+    tagName: h2
+    ↓Text [ngx.components.UIText-1790922903386]: 
+      comment: Use case 5 label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:5. Données vides avec message personnalisé
+  ↓UseSharedEmpty [ngx.components.UIUseShared-1790922907021]: 
+    comment: 'Use case 5: empty data with custom message'
+    identifier: ttEmpty
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1790922911713]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.emptyData
+    ↓columns [ngx.components.UIUseVariable-1790922912431]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeColumns
+    ↓emptyMessage [ngx.components.UIUseVariable-1790922913149]: 
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:'Aucun dossier à afficher'
+↓Footer [ngx.components.UIDynamicElement-1790920829121]: 
+  beanData: '{"ionBean":"Footer"}'
+  comment: Page footer
+  tagName: ion-footer
+↓PageEvent [ngx.components.UIPageEvent-1790920849001]: 
+  comment: Feeds demo tree data when the page is entered
+  ↓InitDemoData [ngx.components.UICustomAsyncAction-1790920855595]: 
+    actionValue: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.FormatedContent
+        - com.twinsoft.convertigo.beans.common.FormatedContent: 
+          →: |
+            '		const node = (name, size, type, children = []) => ({ data: { name: name, size: size, type: type }, expanded: false, children: children });
+            		const folder = (name, children = [], expanded = true) => ({ data: { name: name, size: ''—'', type: ''folder'' }, expanded: expanded, children: children });
+            		page.local.treeData = [
+            			folder(''Documents'', [
+            				folder(''Work'', [
+            					node(''Expenses.xlsx'', ''12 Ko'', ''excel''),
+            					node(''Resume.docx'', ''48 Ko'', ''word''),
+            					node(''Meeting-notes.txt'', ''3 Ko'', ''text'')
+            				]),
+            				folder(''Home'', [
+            					folder(''Invoices'', [
+            						node(''2024.pdf'', ''230 Ko'', ''pdf''),
+            						node(''2025.pdf'', ''198 Ko'', ''pdf'')
+            					]),
+            					node(''Budget.ods'', ''64 Ko'', ''calc'')
+            				]),
+            				folder(''Archive'', [
+            					node(''old-backup.zip'', ''1.2 Go'', ''archive''),
+            					node(''photos-2019.tar'', ''3.4 Go'', ''archive'')
+            				])
+            			]),
+            			folder(''Pictures'', [
+            				node(''barcode.png'', ''17 Ko'', ''image''),
+            				node(''camera.jpg'', ''2.1 Mo'', ''image''),
+            				node(''laptop.png'', ''84 Ko'', ''image''),
+            				node(''screenshot-01.png'', ''440 Ko'', ''image''),
+            				node(''screenshot-02.png'', ''512 Ko'', ''image'')
+            			]),
+            			folder(''Movies'', [
+            				node(''Alpha.mp4'', ''700 Mo'', ''video''),
+            				node(''Beta.mov'', ''1.4 Go'', ''video''),
+            				node(''Gamma.avi'', ''900 Mo'', ''video'')
+            			]),
+            			folder(''Music'', [
+            				folder(''Albums'', [
+            					node(''track-01.mp3'', ''8 Mo'', ''audio''),
+            					node(''track-02.mp3'', ''7 Mo'', ''audio''),
+            					node(''track-03.mp3'', ''9 Mo'', ''audio'')
+            				]),
+            				node(''podcast-ep42.mp3'', ''32 Mo'', ''audio'')
+            			]),
+            			folder(''Projects'', [
+            				node(''lib_TreeTable.ts'', ''21 Ko'', ''code''),
+            				node(''README.md'', ''4 Ko'', ''text''),
+            				node(''package.json'', ''1 Ko'', ''code''),
+            				node(''spec.cy.js'', ''12 Ko'', ''code'')
+            			])
+            		];
+            		page.local.treeColumns = [
+            			{ header: ''Nom'', field: ''name'' },
+            			{ header: ''Taille'', field: ''size'' },
+            			{ header: ''Type'', field: ''type'' }
+            		];
+            		page.local.checkboxColumns = [
+            			{ header: '''', field: ''sel'', type: ''checkbox'' },
+            			{ header: ''Nom'', field: ''name'' },
+            			{ header: ''Taille'', field: ''size'' },
+            			{ header: ''Type'', field: ''type'' }
+            		];
+            		page.local.sortableColumns = [
+            			{ header: ''Nom'', field: ''name'' },
+            			{ header: ''Taille'', field: ''size'' },
+            			{ header: ''Type'', field: ''type'' }
+            		];
+            		page.local.pagedColumns = [
+            			{ header: ''Nom'', field: ''name'' },
+            			{ header: ''Taille'', field: ''size'' },
+            			{ header: ''Type'', field: ''type'' }
+            		];
+            		page.local.reorderColumns = [
+            			{ header: ''Nom'', field: ''name'', reorderable: true },
+            			{ header: ''Taille'', field: ''size'', reorderable: true },
+            			{ header: ''Type'', field: ''type'', reorderable: true }
+            		];
+            		page.local.emptyData = [];
+            		return Promise.resolve({ ok: true });
+            '
+    comment: Initializes realistic hierarchical demo data for the TreeTable
