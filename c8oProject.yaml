@@ -1,10 +1,225 @@
 ↑convertigo: 8.4.0.m006
 ↓lib_TreeTable [core.Project]: 
-  comment: Convertigo NGX builder Project
+  comment: |
+    'Reusable Convertigo NGX library exposing a `treeTable` shared component that wraps [PrimeNG TreeTable v20](https://primeng.org/treetable) (primeng 20.1.0 on Angular 20) to display and interact with hierarchical data in any NGX application.
+    
+    ## Using this library in your application
+    
+    1. In your application project, add a Project reference to `lib_TreeTable`.
+    2. In a page, drop a **Use shared component** targeting `lib_TreeTable.Application.NgxApp.treeTable`.
+    3. At minimum bind `value` (tree data) and `columns` (column definitions). Every other input is optional.
+    
+    Minimal setup (Use shared component variables):
+    
+    | Variable | Example value |
+    |---|---|
+    | value | `this?.local?.treeData` |
+    | columns | `this?.local?.treeColumns` |
+    | selectionMode | `''single''` |
+    
+    ```ts
+    page.local.treeData = [
+      {
+        data: { name: ''Documents'', size: ''—'', type: ''folder'' },
+        expanded: true,
+        children: [
+          { data: { name: ''Resume.docx'', size: ''48 Ko'', type: ''word'' } }
+        ]
+      }
+    ];
+    page.local.treeColumns = [
+      { header: ''Name'', field: ''name'' },
+      { header: ''Size'', field: ''size'' },
+      { header: ''Type'', field: ''type'' }
+    ];
+    ```
+    
+    ## Data model
+    
+    `value` expects an array of PrimeNG `TreeNode` objects:
+    
+    - `data`: object holding the row payload, one property per column `field`.
+    - `children`: array of child nodes (any depth).
+    - `expanded`: optional initial expansion state.
+    - `leaf`: optional hint to hide the expander for empty folders.
+    
+    ## Column definition
+    
+    `columns` expects an array of column objects:
+    
+    | Property | Type | Default | Description |
+    |---|---|---|---|
+    | header | string | — | Header label (rendered empty on checkbox columns). |
+    | field | string | — | Property of `node.data` displayed in the cell. |
+    | sortable | boolean | true | Set `false` to disable header sorting on this column. |
+    | resizable | boolean | true | Set `false` to disable resize on this column (requires `resizableColumns=true`). |
+    | reorderable | boolean | false | Set `true` to allow drag-and-drop reorder of this column (requires `reorderableColumns=true`). |
+    | type | string | — | `''checkbox''` renders the header select-all checkbox and the row selection checkboxes. |
+    
+    The expand/collapse toggler is always rendered in the first column.
+    
+    ## Inputs
+    
+    ### Data and display
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | value | TreeNode[] | `[]` | Hierarchical data to display. |
+    | columns | Column[] | `[]` | Dynamic column definitions (see above). |
+    | emptyMessage | string | `''Aucun enregistrement''` | Message shown when there is no data. |
+    | loading | boolean | `false` | Displays a loader mask over the table. |
+    | showLoader | boolean | `true` | Whether to show the mask when `loading` is true. |
+    | loadingIcon | string | `null` | Icon shown on the loading mask. |
+    | dataKey | string | `null` | Property uniquely identifying a record in data. |
+    | rowTrackBy | function | `null` | Hook delegated to ngForTrackBy to optimize DOM operations. |
+    
+    ### Selection
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | selectionMode | string | `null` | `''single''`, `''multiple''`, `''checkbox''`, or null for no selection. |
+    | selection | TreeNode \| TreeNode[] | `null` | Selected node(s), two-way bound and auto-emitted. |
+    | metaKeySelection | boolean | `false` | Whether ctrl/cmd is required to add a row to the selection. |
+    | compareSelectionBy | string | `''deepEquals''` | Row comparison algorithm: `''equals''` or `''deepEquals''`. |
+    | contextMenuSelection | TreeNode | `null` | Right-click selected row, two-way bound. |
+    | contextMenuSelectionMode | string | `''separate''` | `''separate''` or `''joint''` context menu selection behavior. |
+    
+    ### Sorting
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | sortMode | string | `''single''` | `''single''` or `''multiple''` column sorting. |
+    | sortField | string | `null` | Field used for default sorting. |
+    | sortOrder | number | `null` | Default sort direction: `1` ascending, `-1` descending. |
+    | multiSortMeta | SortMeta[] | `null` | Default sort metas in multiple mode, e.g. `[{field:''name'', order:1}]`. |
+    | defaultSortOrder | number | `1` | Order applied when the user first sorts an unsorted column. |
+    | customSort | boolean | `false` | Set `true` to sort through the `SortFunction` event instead of the built-in sort. |
+    | resetPageOnSort | boolean | `true` | Resets the paginator to the first page after sorting. |
+    
+    ### Filtering
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | globalFilter | string | `null` | Reserved for a global search value (see limitations below). |
+    | globalFilterFields | string[] | `null` | Field names searched by the global filter. |
+    | filters | FilterMetadata | `null` | External filters, e.g. `{name: {value: ''doc'', matchMode: ''contains''}}`. |
+    | filterMode | string | `''lenient''` | `''lenient''` (match at any level) or `''strict''` (whole subtree must match). |
+    | filterDelay | number | `300` | Delay in ms before filtering. |
+    | filterLocale | string | `undefined` | Locale used when filtering. |
+    
+    ### Pagination
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | paginator | boolean | `false` | Enables pagination. |
+    | rows | number | `null` | Rows per page. |
+    | first | number | `0` | Index of the first displayed row. |
+    | rowsPerPageOptions | number[] | `null` | Choices of the rows-per-page dropdown, e.g. `[10,20,50]`. |
+    | paginatorPosition | string | `''bottom''` | `''top''`, `''bottom''` or `''both''`. |
+    | alwaysShowPaginator | boolean | `true` | Show the paginator even with a single page. |
+    | showCurrentPageReport | boolean | `false` | Display the current page report. |
+    | currentPageReportTemplate | string | `''{currentPage} of {totalPages}''` | Report template with `{currentPage},{totalPages},{rows},{first},{last},{totalRecords}`. |
+    | pageLinks | number | `5` | Number of page links displayed. |
+    | showPageLinks | boolean | `true` | Show page links in the paginator. |
+    | showFirstLastIcon | boolean | `true` | Show first/last page icons. |
+    | showJumpToPageDropdown | boolean | `false` | Show a jump-to-page dropdown. |
+    | paginatorLocale | string | `undefined` | Locale used in paginator formatting. |
+    | totalRecords | number | `undefined` | Total record count for lazy pagination; defaults to `value.length`. |
+    
+    ### Scrolling
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | scrollable | boolean | `false` | Enables horizontal/vertical scrolling. |
+    | scrollHeight | string | `null` | Viewport height in px or `''flex''`. |
+    | virtualScroll | boolean | `false` | Load rows on demand while scrolling. |
+    | virtualScrollItemSize | number | `null` | Row height used in virtual scroll calculations (PrimeNG default 28). |
+    | virtualScrollDelay | number | `150` | Delay in ms before virtual scroll triggers. |
+    
+    ### Column layout
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | resizableColumns | boolean | `false` | Allow column resize by drag and drop. |
+    | columnResizeMode | string | `''fit''` | `''fit''` keeps the table width, `''expand''` changes it. |
+    | reorderableColumns | boolean | `false` | Allow column reorder by drag and drop. |
+    | showGridlines | boolean | `false` | Show grid lines between cells. |
+    | autoLayout | boolean | `false` | Cell widths scale to their content. |
+    | frozenWidth | string | `null` | Width of the frozen columns container, e.g. `''200px''`. |
+    | frozenColumns | Column[] | `null` | Column definitions rendered in the frozen container (see limitations). |
+    
+    ### Lazy loading
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | lazy | boolean | `false` | Lazy mode: children are loaded through the `LazyLoad` event instead of being fully provided. |
+    | lazyLoadOnInit | boolean | `true` | Trigger the initial `LazyLoad` when the table is created (only when `lazy=true`). |
+    
+    ### Styling
+    
+    | Variable | Type | Default | Description |
+    |---|---|---|---|
+    | styleClass | string | `null` | Class of the component root element. |
+    | tableStyle | object | `null` | Inline style object of the table, e.g. `{width:''100%''}`. |
+    | tableStyleClass | string | `null` | Class of the table element. |
+    
+    ## Events
+    
+    Every event payload is emitted with the raw PrimeNG event under `event` plus convenience fields.
+    
+    | Event | Emitted data | Description |
+    |---|---|---|
+    | NodeSelect | `{event, node}` | A node is selected by row click (`selectionMode` set). |
+    | NodeUnselect | `{event, node}` | A node is unselected. |
+    | NodeExpand | `{event, node}` | A node is expanded. |
+    | NodeCollapse | `{event, node}` | A node is collapsed. |
+    | SelectionChange | selected node(s) | Selection changed (emitted from the two-way `selection` binding). |
+    | Page | `{event, first, rows}` | Pagination occurred. |
+    | Sort | `{event, field, order}` | A column is sorted (built-in sort). |
+    | SortFunction | `{event, field, order}` | Custom sort requested, when `customSort=true`. |
+    | Filter | `{event, filters}` | Data has been filtered. |
+    | LazyLoad | `{event, first, rows}` | Paging, sorting or filtering happened in lazy mode. |
+    | ColResize | `{event, element, delta}` | A column has been resized. |
+    | ColReorder | `{event, dragIndex, dropIndex}` | A column has been reordered. |
+    | ContextMenuSelect | `{event, node}` | A node is selected with a right click. |
+    | HeaderCheckboxToggle | `{event, checked}` | The header select-all checkbox changed. |
+    | EditInit | `{event, node}` | A cell switched to edit mode (see limitations). |
+    | EditComplete | `{event, node}` | A cell edit is completed (see limitations). |
+    | EditCancel | `{event, node}` | A cell edit is cancelled (see limitations). |
+    
+    ## Demo page
+    
+    The `testTreeTable` page (labels in French) hosts five use cases of the component, each with its own title:
+    
+    | # | Use case | Key settings | Demonstrates |
+    |---|---|---|---|
+    | 1 | Single selection with column sorting | `selectionMode=''single''` | Row click selection, expand/collapse, sortable headers. |
+    | 2 | Multiple selection with checkboxes | a `{type:''checkbox''}` column, `selectionMode=''checkbox''`, `showGridlines=true` | Row checkboxes, header select-all, gridlines. |
+    | 3 | Pagination with fixed scroll | `paginator=true`, `rows=2`, `rowsPerPageOptions=[2,5,10]`, `scrollable=true`, `scrollHeight=''260px''` | Paginator, rows per page selector, fixed-height scrolling. |
+    | 4 | Resizable and reorderable columns | `resizableColumns=true`, `reorderableColumns=true`, columns with `reorderable:true` | Column resize and drag-and-drop reorder. |
+    | 5 | Empty data | `value=[]`, `emptyMessage=''Aucun dossier à afficher''` | Custom empty message. |
+    
+    Demo data is injected by the page `PageEvent` with a realistic file-explorer tree (34 nodes).
+    
+    ## Dependencies
+    
+    Registered automatically on the shared component host module:
+    
+    - `primeng` 20.1.0 (`TreeTableModule` from `primeng/treetable`).
+    - `@primeuix/themes` 2.0.2 with the Aura preset through `providePrimeNG`.
+    
+    ## Notes and limitations
+    
+    - `globalFilter` is declared but not bound inside the component template; drive global search through the `filters` input or bind your own input to `globalFilterFields`.
+    - There is no built-in per-column filter UI; provide filters programmatically through `filters`.
+    - `frozenWidth` and `frozenColumns` are bound as inputs but frozen templates are not rendered in this version, so frozen columns are not displayed yet.
+    - `EditInit`, `EditComplete` and `EditCancel` are event pass-throughs; no editable cells are rendered by the component templates.
+    - `ContextMenuSelect` is an event pass-through; the context menu itself must be provided by the hosting page.
+    - The expand/collapse toggler is always rendered in the first column, regardless of column properties.'
   contextTimeout: 59
   corsOrigin: =Origin
   httpSessionTimeout: 60
-  version: 8.4.0
+  version: 8.4.1
   ↓void [connectors.SqlConnector]: 🗏 connectors/void.yaml
   ↓project1 [references.ProjectSchemaReference]: 
     projectName: mobilebuilder_tpl_8_4_0_ngx=https://github.com/convertigo/c8oprj-mobilebuilder-tpl/archive/mobilebuilder_tpl_8_4_0_ngx.zip

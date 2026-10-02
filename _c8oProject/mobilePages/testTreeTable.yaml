@@ -1,3 +1,4 @@
+↑isRoot: true
 comment: Test page for the lib_TreeTable shared component
 scriptContent: 
   - xmlizable: 
