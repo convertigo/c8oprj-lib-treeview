@@ -241,13 +241,13 @@ For more technical informations : [documentation](./project.md)
      <tr><td>To contribute</td><td>
 
      ```
-     lib_TreeTable=/Users/olivierpicciotto/ai/lib_TreeTable/.git:branch=main
+     lib_TreeTable=https://github.com/convertigo/c8oprj-lib-treeview.git:branch=main
      ```
      </td></tr>
      <tr><td>To simply use</td><td>
 
      ```
-     lib_TreeTable=/Users/olivierpicciotto/ai/lib_TreeTable//archive/main.zip
+     lib_TreeTable=https://github.com/convertigo/c8oprj-lib-treeview/archive/main.zip
      ```
      </td></tr>
     </table>
