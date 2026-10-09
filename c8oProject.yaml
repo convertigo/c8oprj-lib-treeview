@@ -215,7 +215,8 @@
     - `frozenWidth` and `frozenColumns` are bound as inputs but frozen templates are not rendered in this version, so frozen columns are not displayed yet.
     - `EditInit`, `EditComplete` and `EditCancel` are event pass-throughs; no editable cells are rendered by the component templates.
     - `ContextMenuSelect` is an event pass-through; the context menu itself must be provided by the hosting page.
-    - The expand/collapse toggler is always rendered in the first column, regardless of column properties.'
+    - The expand/collapse toggler is always rendered in the first column, regardless of column properties.
+    '
   contextTimeout: 59
   corsOrigin: =Origin
   httpSessionTimeout: 60

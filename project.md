@@ -217,6 +217,7 @@ Registered automatically on the shared component host module:
 - `ContextMenuSelect` is an event pass-through; the context menu itself must be provided by the hosting page.
 - The expand/collapse toggler is always rendered in the first column, regardless of column properties.
 
+
 <details><summary><span style="color:DarkGoldenRod"><i>Connectors</i></span></summary><blockquote><p>
 
 
@@ -265,6 +266,8 @@ Features:
 - [x] Scrollable with fixed height or flex
 - [x] Virtual scroll for large datasets
 - [x] Resizable/reorderable columns
+- [x] Column width (col.width) applied to header and body cells
+- [x] Action buttons column (col.type = 'actions'): each col.actions entry is a configurable ion-button supporting label, icon (start/left), iconEnd (end/right), iconSize, iconEndSize, iconSlot, iconEndSlot, color, fill, size, shape, expand, strong, disabled, title. Icon-only is automatic when no label is set. Emits ActionClick {action, node, rowData}
 - [x] Lazy loading mode
 - [x] Frozen columns
 - [x] Row hover, gridlines, auto layout
@@ -769,6 +772,14 @@ name
 <th>
 comment
 </th>
+</tr>
+<tr>
+<td>
+<img src="https://github.com/convertigo/convertigo/blob/develop/engine/src/com/twinsoft/convertigo/beans/ngx/components/images/uicompevent_16x16.png?raw=true "  alt="UICompEvent" >&nbsp;ActionClick
+</td>
+<td>
+Fired when an action button is clicked in an actions column. Data: {action, node, rowData}
+</td>
 </tr>
 <tr>
 <td>
