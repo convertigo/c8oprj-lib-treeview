@@ -11,6 +11,8 @@ comment: |
   - [x] Scrollable with fixed height or flex
   - [x] Virtual scroll for large datasets
   - [x] Resizable/reorderable columns
+  - [x] Column width (col.width) applied to header and body cells
+  - [x] Action buttons column (col.type = ''actions''): each col.actions entry is a configurable ion-button supporting label, icon (start/left), iconEnd (end/right), iconSize, iconEndSize, iconSlot, iconEndSlot, color, fill, size, shape, expand, strong, disabled, title. Icon-only is automatic when no label is set. Emits ActionClick {action, node, rowData}
   - [x] Lazy loading mode
   - [x] Frozen columns
   - [x] Row hover, gridlines, auto layout
@@ -268,6 +270,9 @@ scriptContent:
 ↓EditCancel [ngx.components.UICompEvent-1790919184770]: 
   attrName: EditCancel
   comment: 'Fired when cell edit is cancelled with escape key. Data: {field, data}'
+↓ActionClick [ngx.components.UICompEvent-1791534152529]: 
+  attrName: ActionClick
+  comment: 'Fired when an action button is clicked in an actions column. Data: {action, node, rowData}'
 ↓Tag [ngx.components.UIElement-1790919185538]: 
   identifier: tt
   tagName: p-treetable
@@ -846,6 +851,13 @@ scriptContent:
             comment: Select-all checkbox rendered on checkbox columns
             selfClose: true
             tagName: p-treeTableHeaderCheckbox
+        ↓at_colWidth [ngx.components.UIAttribute-1791536130571]: 
+          attrName: '[style.width]'
+          attrValue: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+              - MobileSmartSourceType: script:col?.width || null
+          comment: Optional fixed column width (col.width)
   ↓BodyTemplate [ngx.components.UIElement-1790920509621]: 
     comment: 'PrimeNG body template: renders one tr per visible serialized node'
     tagName: ng-template
@@ -936,7 +948,7 @@ scriptContent:
             textValue: 
               - xmlizable: 
                 - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
-                - MobileSmartSourceType: 'plain:{{col?.type === ''checkbox'' ? '''' : rowData[col?.field]}}'
+                - MobileSmartSourceType: 'plain:{{col?.type === ''checkbox'' || col?.type === ''actions'' ? '''' : rowData[col?.field]}}'
           ↓CheckboxIf [ngx.components.UIControlDirective-1790922792320]: 
             comment: Renders a row checkbox on checkbox columns
             directiveName: If
@@ -955,6 +967,143 @@ scriptContent:
                     - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
                     - MobileSmartSourceType: script:rowNode
                 comment: Binds the current serialized node to the row checkbox (TTCheckbox input alias is 'value'/'rowNode' via args:['value'])
+          ↓ActionsIf [ngx.components.UIControlDirective-1791534165208]: 
+            comment: Renders action buttons only on actions columns
+            directiveName: If
+            directiveSource: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                - MobileSmartSourceType: script:col?.type === 'actions'
+            ↓RowForEach [ngx.components.UIControlDirective-1791534480957]: 
+              comment: Smuggles the current row node and data into the action handler scope (single-iteration loop)
+              directiveIndexName: rowIdx
+              directiveItemName: row
+              directiveSource: 
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                  - MobileSmartSourceType: 'script:[{node: rowNode?.node, data: rowData}]'
+              ↓ActionsForEach [ngx.components.UIControlDirective-1791534165790]: 
+                comment: Iterates the actions list of an actions column to render one button per action
+                directiveIndexName: actionIndex
+                directiveItemName: action
+                directiveSource: 
+                  - xmlizable: 
+                    - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                    - MobileSmartSourceType: script:col?.actions
+                ↓ActionButton [ngx.components.UIDynamicElement-1791534165792]: 
+                  beanData: |
+                    '{
+                     "ionBean": "Button",
+                     "Disabled": "script:action?.disabled === true",
+                     "IonColor": "script:action?.color",
+                     "IonExpand": "script:action?.expand",
+                     "IonShape": "script:action?.shape",
+                     "IonFill": "script:action?.fill",
+                     "IonSize": "script:action?.size || ''small''",
+                     "IonStrong": "script:action?.strong === true"
+                    }'
+                  comment: Action button rendered for each entry of col.actions. All Ionic button properties (color, fill, size, shape, expand, strong, disabled) are configurable per action
+                  tagName: ion-button
+                  ↓ButtonClick [ngx.components.UIControlEvent-1791534166376]: 
+                    comment: Click handler for a row action button
+                    eventName: (click)
+                    ↓EmitAction [ngx.components.UIDynamicEmit-1791534166626]: 
+                      beanData: |
+                        '{
+                         "ionBean": "EmitEventAction",
+                         "event": "plain:lib_TreeTable.Application.NgxApp.treeTable.ActionClick",
+                         "data": "script:{action: action, node: row?.node, rowData: row?.data}"
+                        }'
+                      comment: Emits ActionClick with the action definition, the row node and the row data
+                  ↓IconIf [ngx.components.UIControlDirective-1791534282611]: 
+                    comment: Shows the icon only when the action defines one
+                    directiveName: If
+                    directiveSource: 
+                      - xmlizable: 
+                        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                        - MobileSmartSourceType: script:action?.icon
+                    ↓Icon [ngx.components.UIElement-1791534283193]: 
+                      comment: Icon rendered inside the action button when action.icon is set. iconSize and iconSlot are configurable per action
+                      selfClose: true
+                      tagName: ion-icon
+                      ↓at_IconName [ngx.components.UIAttribute-1791534283775]: 
+                        attrName: '[name]'
+                        attrValue: 
+                          - xmlizable: 
+                            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                            - MobileSmartSourceType: script:action?.icon
+                        comment: Icon name from the action definition
+                      ↓at_IconSize [ngx.components.UIAttribute-1791534978114]: 
+                        attrName: '[size]'
+                        attrValue: 
+                          - xmlizable: 
+                            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                            - MobileSmartSourceType: script:action?.iconSize
+                        comment: Optional icon size (small, large...)
+                      ↓at_IconSlot [ngx.components.UIAttribute-1791534978116]: 
+                        attrName: '[slot]'
+                        attrValue: 
+                          - xmlizable: 
+                            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                            - MobileSmartSourceType: 'script:action?.iconSlot || (action?.label ? ''start'' : ''icon-only'')'
+                        comment: 'Icon slot: start (left) when the action has a label, icon-only when there is no label'
+                  ↓LabelIf [ngx.components.UIControlDirective-1791534981557]: 
+                    comment: Shows the button label text only when the action defines one
+                    directiveName: If
+                    directiveSource: 
+                      - xmlizable: 
+                        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                        - MobileSmartSourceType: script:action?.label
+                    ↓ButtonLabel [ngx.components.UIText-1791534166374]: 
+                      comment: Visible label of the action button
+                      textValue: 
+                        - xmlizable: 
+                          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                          - MobileSmartSourceType: plain:{{action?.label}}
+                  ↓IconEndIf [ngx.components.UIControlDirective-1791535116452]: 
+                    directiveName: If
+                    directiveSource: 
+                      - xmlizable: 
+                        - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                        - MobileSmartSourceType: script:action?.iconEnd
+                    ↓IconEnd [ngx.components.UIElement-1791535117034]: 
+                      selfClose: true
+                      tagName: ion-icon
+                      ↓at_IconEndName [ngx.components.UIAttribute-1791535143580]: 
+                        attrName: '[name]'
+                        attrValue: 
+                          - xmlizable: 
+                            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                            - MobileSmartSourceType: script:action?.iconEnd
+                        comment: End icon name from the action definition
+                      ↓at_IconEndSize [ngx.components.UIAttribute-1791535145674]: 
+                        attrName: '[size]'
+                        attrValue: 
+                          - xmlizable: 
+                            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                            - MobileSmartSourceType: script:action?.iconEndSize || action?.iconSize
+                        comment: Optional end icon size, falls back to iconSize
+                      ↓at_IconEndSlot [ngx.components.UIAttribute-1791535147933]: 
+                        attrName: '[slot]'
+                        attrValue: 
+                          - xmlizable: 
+                            - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                            - MobileSmartSourceType: script:action?.iconEndSlot || 'end'
+                        comment: 'End icon slot: defaults to end so the icon renders after the label'
+          ↓Attr_cellClass [ngx.components.UIAttribute-1791534176265]: 
+            attrName: '[class]'
+            attrValue: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                - MobileSmartSourceType: 'script:col?.type === ''actions'' ? ''tt-actions-cell'' : '''''
+            comment: Marks action cells so buttons align right
+          ↓at_colWidth [ngx.components.UIAttribute-1791536131153]: 
+            attrName: '[style.width]'
+            attrValue: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+                - MobileSmartSourceType: script:col?.width || null
+            comment: Optional fixed column width (col.width)
   ↓EmptyMessageTemplate [ngx.components.UIElement-1790920510323]: 
     comment: 'PrimeNG emptymessage template: rendered when the table has no data'
     tagName: ng-template
@@ -1065,3 +1214,26 @@ scriptContent:
                 - ↑value: '@primeuix/themes'
               - java.lang.String: 
                 - ↑value: 2.0.2
+↓ActionsStyle [ngx.components.UIStyle-1791534178797]: 
+  comment: 'Styles the actions column: buttons right-aligned, wrapping inside the cell, compact enough to fit many actions on one line'
+  styleContent: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.FormatedContent
+      - com.twinsoft.convertigo.beans.common.FormatedContent: 
+        →: |
+          ':host ::ng-deep .tt-actions-cell.tt-actions-cell {
+            text-align: right;
+            white-space: normal;
+          }
+          :host ::ng-deep .tt-actions-cell ion-button {
+            margin: 1px 0 1px 3px;
+            vertical-align: middle;
+          }
+          :host ::ng-deep .tt-actions-cell ion-button.button-small {
+            --padding-start: 6px;
+            --padding-end: 6px;
+            font-size: 11px;
+          }
+          :host ::ng-deep .tt-actions-cell ion-button ion-icon {
+            font-size: 13px;
+          }'

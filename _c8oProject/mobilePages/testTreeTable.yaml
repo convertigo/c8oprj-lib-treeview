@@ -38,6 +38,46 @@ title: testTreeTable
   beanData: '{"ionBean":"Content"}'
   comment: Main content hosting the TreeTable demo
   tagName: ion-content
+  ↓Case6Title [ngx.components.UIDynamicElement-1791534190165]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of use case 6
+    tagName: h2
+    ↓Text [ngx.components.UIText-1791534190167]: 
+      comment: Use case 6 label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:1. Boutons d'action dans une colonne à droite
+  ↓UseSharedActions [ngx.components.UIUseShared-1791534193748]: 
+    comment: 'Use case 6: action buttons in a right column'
+    identifier: ttActions
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1791534194346]: 
+      comment: Hierarchical demo data
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeData
+    ↓columns [ngx.components.UIUseVariable-1791534194348]: 
+      comment: Demo columns including an actions column on the right
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.actionsColumns
+    ↓ActionClickEvent [ngx.components.UIControlEvent-1791534251751]: 
+      attrName: (ActionClick)
+      comment: Handles ActionClick emitted by the treeTable shared component
+      eventName: (ActionClick)
+      ↓RecordAction [ngx.components.UICustomAsyncAction-1791534251993]: 
+        actionValue: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.FormatedContent
+            - com.twinsoft.convertigo.beans.common.FormatedContent: 
+              →: |
+                'const label = event?.action?.label || event?.action?.title || '''';
+                page.local.lastAction = label + '' — '' + (event?.rowData?.name || event?.node?.data?.name || '''');
+                return Promise.resolve({ok: true});'
+        comment: Records the clicked action (label or title fallback) and target row into page locals
   ↓Case1Title [ngx.components.UIDynamicElement-1790922844100]: 
     beanData: '{"ionBean":"TextItem"}'
     comment: Title of use case 1
@@ -47,7 +87,7 @@ title: testTreeTable
       textValue: 
         - xmlizable: 
           - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
-          - MobileSmartSourceType: plain:1. Sélection simple avec tri des colonnes
+          - MobileSmartSourceType: plain:2. Sélection simple avec tri des colonnes
   ↓UseSharedTreeTable [ngx.components.UIUseShared-1790920839479]: 
     comment: Uses the treeTable shared component with demo data
     identifier: ttDemo
@@ -79,7 +119,7 @@ title: testTreeTable
       textValue: 
         - xmlizable: 
           - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
-          - MobileSmartSourceType: plain:2. Sélection multiple par cases à cocher
+          - MobileSmartSourceType: plain:3. Sélection multiple par cases à cocher
   ↓UseSharedCheckbox [ngx.components.UIUseShared-1790922858639]: 
     comment: 'Use case 2: multiple selection with checkboxes'
     identifier: ttCheckbox
@@ -113,7 +153,7 @@ title: testTreeTable
       textValue: 
         - xmlizable: 
           - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
-          - MobileSmartSourceType: plain:3. Pagination avec 2 dossiers par page et défilement fixe
+          - MobileSmartSourceType: plain:4. Pagination avec 2 dossiers par page et défilement fixe
   ↓UseSharedPaged [ngx.components.UIUseShared-1790922874299]: 
     comment: 'Use case 3: paginator with fixed scroll height'
     identifier: ttPaged
@@ -162,7 +202,7 @@ title: testTreeTable
       textValue: 
         - xmlizable: 
           - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
-          - MobileSmartSourceType: plain:4. Colonnes redimensionnables et réordonnables par glisser-déposer
+          - MobileSmartSourceType: plain:5. Colonnes redimensionnables et réordonnables par glisser-déposer
   ↓UseSharedResize [ngx.components.UIUseShared-1790922891634]: 
     comment: 'Use case 4: resizable and reorderable columns'
     identifier: ttResize
@@ -196,7 +236,7 @@ title: testTreeTable
       textValue: 
         - xmlizable: 
           - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
-          - MobileSmartSourceType: plain:5. Données vides avec message personnalisé
+          - MobileSmartSourceType: plain:6. Données vides avec message personnalisé
   ↓UseSharedEmpty [ngx.components.UIUseShared-1790922907021]: 
     comment: 'Use case 5: empty data with custom message'
     identifier: ttEmpty
@@ -216,6 +256,22 @@ title: testTreeTable
         - xmlizable: 
           - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
           - MobileSmartSourceType: script:'Aucun dossier à afficher'
+  ↓LastActionLine [ngx.components.UIDynamicElement-1791534264302]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Shows the last action clicked in the use case 6 table
+    tagName: p
+    ↓Label [ngx.components.UIText-1791534264304]: 
+      comment: Static label before the last action
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: 'plain:Dernière action : '
+    ↓Value [ngx.components.UIText-1791534264306]: 
+      comment: Last clicked action, bound to the lastAction local
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.lastAction
 ↓Footer [ngx.components.UIDynamicElement-1790920829121]: 
   beanData: '{"ionBean":"Footer"}'
   comment: Page footer
@@ -243,7 +299,7 @@ title: testTreeTable
             						node(''2025.pdf'', ''198 Ko'', ''pdf'')
             					]),
             					node(''Budget.ods'', ''64 Ko'', ''calc'')
-            				]),
+            			]),
             				folder(''Archive'', [
             					node(''old-backup.zip'', ''1.2 Go'', ''archive''),
             					node(''photos-2019.tar'', ''3.4 Go'', ''archive'')
@@ -263,9 +319,9 @@ title: testTreeTable
             			]),
             			folder(''Music'', [
             				folder(''Albums'', [
-            					node(''track-01.mp3'', ''8 Mo'', ''audio''),
-            					node(''track-02.mp3'', ''7 Mo'', ''audio''),
-            					node(''track-03.mp3'', ''9 Mo'', ''audio'')
+            						node(''track-01.mp3'', ''8 Mo'', ''audio''),
+            						node(''track-02.mp3'', ''7 Mo'', ''audio''),
+            						node(''track-03.mp3'', ''9 Mo'', ''audio'')
             				]),
             				node(''podcast-ep42.mp3'', ''32 Mo'', ''audio'')
             			]),
@@ -302,7 +358,21 @@ title: testTreeTable
             			{ header: ''Taille'', field: ''size'', reorderable: true },
             			{ header: ''Type'', field: ''type'', reorderable: true }
             		];
+            		page.local.actionsColumns = [
+            			{ header: ''Nom'', field: ''name'', width: ''20%'' },
+            			{ header: ''Taille'', field: ''size'', width: ''13%'' },
+            			{ header: ''Type'', field: ''type'', width: ''13%'' },
+            			{ header: ''Actions'', field: ''actions'', type: ''actions'', sortable: false, width: ''54%'', actions: [
+            				{ label: ''Voir'', icon: ''eye-outline'', color: ''primary'', fill: ''solid'' },
+            				{ label: ''Éditer'', icon: ''create-outline'', color: ''secondary'', fill: ''outline'' },
+            				{ label: ''Supprimer'', icon: ''trash-outline'', color: ''danger'', fill: ''solid'' },
+            				{ icon: ''download-outline'', color: ''medium'', fill: ''clear'', title: ''Télécharger'' },
+            				{ label: ''Suivant'', iconEnd: ''chevron-forward-outline'', color: ''primary'', fill: ''outline'' },
+            				{ label: ''Défiler'', icon: ''play-outline'', iconEnd: ''chevron-forward-outline'', color: ''tertiary'', fill: ''solid'' }
+            			] }
+            		];
             		page.local.emptyData = [];
+            		page.local.lastAction = '''';
             		return Promise.resolve({ ok: true });
             '
-    comment: Initializes realistic hierarchical demo data for the TreeTable
+    comment: Initializes demo data with configurable action button types and column widths (col.width) so the actions column can fit all buttons on one line
