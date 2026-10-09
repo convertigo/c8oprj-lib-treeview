@@ -53,12 +53,63 @@ page.local.treeColumns = [
 |---|---|---|---|
 | header | string | — | Header label (rendered empty on checkbox columns). |
 | field | string | — | Property of `node.data` displayed in the cell. |
+| width | string | null | Optional fixed column width (CSS value such as `'200px'` or `'54%'`), applied to the header and body cells. |
 | sortable | boolean | true | Set `false` to disable header sorting on this column. |
 | resizable | boolean | true | Set `false` to disable resize on this column (requires `resizableColumns=true`). |
 | reorderable | boolean | false | Set `true` to allow drag-and-drop reorder of this column (requires `reorderableColumns=true`). |
-| type | string | — | `'checkbox'` renders the header select-all checkbox and the row selection checkboxes. |
+| type | string | — | `'checkbox'` renders the header select-all checkbox and the row selection checkboxes. `'actions'` renders the action buttons defined in `actions` (see below). |
+| actions | Action[] | — | Action button definitions, only used when `type` is `'actions'`. |
 
 The expand/collapse toggler is always rendered in the first column.
+
+## Action buttons column
+
+A column with `type: 'actions'` renders one Ionic button per `actions` entry in the cell, aligned to the right. Buttons wrap onto several lines when the column is too narrow, so they never overflow the table.
+
+Each action object supports:
+
+| Property | Type | Default | Description |
+|---|---|---|---|
+| label | string | — | Button label. When omitted, the button renders as an icon-only button. |
+| title | string | — | Tooltip, also used as the action name in `ActionClick` payloads when no label is set. |
+| icon | string | — | Icon name rendered on the left (Ionic icon, e.g. `'eye-outline'`). |
+| iconEnd | string | — | Icon name rendered on the right, after the label (e.g. `'chevron-forward-outline'`). |
+| iconSize | string | null | Size of the left icon (e.g. `'small'`, `'large'`). |
+| iconEndSize | string | null | Size of the right icon; falls back to `iconSize`. |
+| iconSlot | string | auto | Overrides the left icon slot. Defaults to `'start'` when a label is set, `'icon-only'` otherwise. |
+| iconEndSlot | string | `'end'` | Overrides the right icon slot. |
+| color | string | null | Ionic color of the button (`'primary'`, `'secondary'`, `'danger'`, `'medium'`, `'tertiary'`...). |
+| fill | string | null | Button fill: `'solid'`, `'outline'` or `'clear'`. |
+| size | string | `'small'` | Button size (`'small'`, `'default'`, `'large'`). |
+| shape | string | null | Button shape, e.g. `'round'`. |
+| expand | string | null | Button expand mode, e.g. `'full'` or `'block'`. |
+| strong | boolean | false | Renders the button with a strong (bold) font weight. |
+| disabled | boolean | false | Disables the button. |
+
+Icon placement examples:
+
+- Icon on the left: `{label: 'Voir', icon: 'eye-outline', color: 'primary', fill: 'solid'}`
+- Icon on the right: `{label: 'Suivant', iconEnd: 'chevron-forward-outline', color: 'primary', fill: 'outline'}`
+- Icons on both sides: `{label: 'Défiler', icon: 'play-outline', iconEnd: 'chevron-forward-outline'}`
+- Icon only: `{icon: 'download-outline', color: 'medium', fill: 'clear', title: 'Télécharger'}`
+
+Clicking a button emits the `ActionClick` event.
+
+```ts
+page.local.actionColumns = [
+  { header: 'Name', field: 'name', width: '20%' },
+  { header: 'Size', field: 'size', width: '13%' },
+  { header: 'Type', field: 'type', width: '13%' },
+  {
+    header: 'Actions', field: 'actions', type: 'actions', sortable: false, width: '54%',
+    actions: [
+      { label: 'View', icon: 'eye-outline', color: 'primary', fill: 'solid' },
+      { label: 'Delete', icon: 'trash-outline', color: 'danger', fill: 'solid' },
+      { icon: 'download-outline', color: 'medium', fill: 'clear', title: 'Download' }
+    ]
+  }
+];
+```
 
 ## Inputs
 
@@ -171,6 +222,7 @@ Every event payload is emitted with the raw PrimeNG event under `event` plus con
 
 | Event | Emitted data | Description |
 |---|---|---|
+| ActionClick | `{action, node, rowData}` | A button of an actions column was clicked (see Action buttons column). |
 | NodeSelect | `{event, node}` | A node is selected by row click (`selectionMode` set). |
 | NodeUnselect | `{event, node}` | A node is unselected. |
 | NodeExpand | `{event, node}` | A node is expanded. |
@@ -191,15 +243,16 @@ Every event payload is emitted with the raw PrimeNG event under `event` plus con
 
 ## Demo page
 
-The `testTreeTable` page (labels in French) hosts five use cases of the component, each with its own title:
+The `testTreeTable` page (labels in French) hosts six use cases of the component, each with its own title:
 
 | # | Use case | Key settings | Demonstrates |
 |---|---|---|---|
-| 1 | Single selection with column sorting | `selectionMode='single'` | Row click selection, expand/collapse, sortable headers. |
-| 2 | Multiple selection with checkboxes | a `{type:'checkbox'}` column, `selectionMode='checkbox'`, `showGridlines=true` | Row checkboxes, header select-all, gridlines. |
-| 3 | Pagination with fixed scroll | `paginator=true`, `rows=2`, `rowsPerPageOptions=[2,5,10]`, `scrollable=true`, `scrollHeight='260px'` | Paginator, rows per page selector, fixed-height scrolling. |
-| 4 | Resizable and reorderable columns | `resizableColumns=true`, `reorderableColumns=true`, columns with `reorderable:true` | Column resize and drag-and-drop reorder. |
-| 5 | Empty data | `value=[]`, `emptyMessage='Aucun dossier à afficher'` | Custom empty message. |
+| 1 | Action buttons in a right column | a `{type:'actions'}` column with `col.width`, `ActionClick` handler | Six Ionic buttons covering all configurations (icon left, icon right, icons on both sides, icon-only, colors and fills), non-overflowing wrap, `ActionClick` event. Clicking a button updates the `Dernière action` line below the table. |
+| 2 | Single selection with column sorting | `selectionMode='single'` | Row click selection, expand/collapse, sortable headers. |
+| 3 | Multiple selection with checkboxes | a `{type:'checkbox'}` column, `selectionMode='checkbox'`, `showGridlines=true` | Row checkboxes, header select-all, gridlines. |
+| 4 | Pagination with fixed scroll | `paginator=true`, `rows=2`, `rowsPerPageOptions=[2,5,10]`, `scrollable=true`, `scrollHeight='260px'` | Paginator, rows per page selector, fixed-height scrolling. |
+| 5 | Resizable and reorderable columns | `resizableColumns=true`, `reorderableColumns=true`, columns with `reorderable:true` | Column resize and drag-and-drop reorder. |
+| 6 | Empty data | `value=[]`, `emptyMessage='Aucun dossier à afficher'` | Custom empty message. |
 
 Demo data is injected by the page `PageEvent` with a realistic file-explorer tree (34 nodes).
 
@@ -218,7 +271,6 @@ Registered automatically on the shared component host module:
 - `EditInit`, `EditComplete` and `EditCancel` are event pass-throughs; no editable cells are rendered by the component templates.
 - `ContextMenuSelect` is an event pass-through; the context menu itself must be provided by the hosting page.
 - The expand/collapse toggler is always rendered in the first column, regardless of column properties.
-
 
 
 For more technical informations : [documentation](./project.md)
@@ -268,6 +320,8 @@ TreeTable shared component wrapping PrimeNG TreeTable v20.
 Features:
 - [x] Hierarchical data display (TreeNode[] with children)
 - [x] Expand/collapse nodes
+- [x] Action buttons column (`type: 'actions'` with configurable Ionic buttons)
+- [x] Column width (`col.width` applied to header and body cells)
 - [x] Single or multiple selection (row click or checkbox)
 - [x] Column sorting (single or multiple)
 - [x] Client-side filtering (global or per column)
@@ -275,8 +329,6 @@ Features:
 - [x] Scrollable with fixed height or flex
 - [x] Virtual scroll for large datasets
 - [x] Resizable/reorderable columns
-- [x] Column width (col.width) applied to header and body cells
-- [x] Action buttons column (col.type = 'actions'): each col.actions entry is a configurable ion-button supporting label, icon (start/left), iconEnd (end/right), iconSize, iconEndSize, iconSlot, iconEndSlot, color, fill, size, shape, expand, strong, disabled, title. Icon-only is automatic when no label is set. Emits ActionClick {action, node, rowData}
 - [x] Lazy loading mode
 - [x] Frozen columns
 - [x] Row hover, gridlines, auto layout
@@ -301,7 +353,7 @@ Based on PrimeNG 20.1.0 (Angular 20). Documentation: https://primeng.org/treetab
 <td>columnResizeMode</td><td>Whether the overall table width should change on column resize: 'fit' or 'expand'. Default 'fit'</td>
 </tr>
 <tr>
-<td>columns</td><td>Array of column objects. Column shape: {header: 'Name', field: 'name', sortable: true, filterable: true, width: 'auto', align: 'left', expander: true}</td>
+<td>columns</td><td>Array of column objects. Column shape: {header: 'Name', field: 'name', sortable: true, resizable: true, reorderable: false, width: '200px' or '54%', type: null or 'checkbox' or 'actions', actions: [{label, title, icon, iconEnd, iconSize, iconEndSize, iconSlot, iconEndSlot, color, fill, size, shape, expand, strong, disabled}]}</td>
 </tr>
 <tr>
 <td>compareSelectionBy</td><td>Algorithm to define if a row is selected: 'equals' or 'deepEquals'. Default 'deepEquals'</td>
@@ -477,7 +529,7 @@ Based on PrimeNG 20.1.0 (Angular 20). Documentation: https://primeng.org/treetab
 <th>name</th><th>comment</th>
 </tr>
 <tr>
-<td>ActionClick</td><td>Fired when an action button is clicked in an actions column. Data: {action, node, rowData}</td>
+<td>ActionClick</td><td>Fired when a button of an actions column is clicked. Data: {action: string (label or title), node: TreeNode, rowData: node.data}</td>
 </tr>
 <tr>
 <td>ColReorder</td><td>Fired when a column is reordered. Data: {dragIndex, dropIndex, columns}</td>
