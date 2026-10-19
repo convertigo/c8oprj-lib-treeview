@@ -85,6 +85,26 @@ Each action object supports:
 | expand | string | null | Button expand mode, e.g. `'full'` or `'block'`. |
 | strong | boolean | false | Renders the button with a strong (bold) font weight. |
 | disabled | boolean | false | Disables the button. |
+| visible | function | — | Optional predicate `(node, rowData) => boolean` evaluated for each row: the button is rendered only when it returns `true`. When omitted or `undefined`, the button is always shown. |
+
+Per-row visibility example (hide a button on parent nodes):
+
+```ts
+page.local.visibleActionsColumns = [
+  { header: 'Name', field: 'name', width: '25%' },
+  { header: 'Type', field: 'type', width: '15%' },
+  {
+    header: 'Actions', field: 'actions', type: 'actions', sortable: false, width: '60%',
+    actions: [
+      { label: 'Open', icon: 'folder-open-outline', color: 'primary', fill: 'solid',
+        visible: (node, rowData) => rowData?.type === 'folder' },
+      { label: 'View', icon: 'eye-outline', color: 'secondary', fill: 'outline',
+        visible: (node, rowData) => rowData?.type !== 'folder' },
+      { label: 'Delete', icon: 'trash-outline', color: 'danger', fill: 'solid' }
+    ]
+  }
+];
+```
 
 Icon placement examples:
 
@@ -248,6 +268,7 @@ The `testTreeTable` page (labels in French) hosts six use cases of the component
 | # | Use case | Key settings | Demonstrates |
 |---|---|---|---|
 | 1 | Action buttons in a right column | a `{type:'actions'}` column with `col.width`, `ActionClick` handler | Six Ionic buttons covering all configurations (icon left, icon right, icons on both sides, icon-only, colors and fills), non-overflowing wrap, `ActionClick` event. Clicking a button updates the `Dernière action` line below the table. |
+| 1b | Conditional action buttons | `action.visible(node, rowData)` predicates (folder vs file) | The `Ouvrir` button only appears on folder rows, the `Voir` button only on file rows, while the `Supprimer` button (no `visible`) appears on every row. Clicking updates the `Dernière action` line. |
 | 2 | Single selection with column sorting | `selectionMode='single'` | Row click selection, expand/collapse, sortable headers. |
 | 3 | Multiple selection with checkboxes | a `{type:'checkbox'}` column, `selectionMode='checkbox'`, `showGridlines=true` | Row checkboxes, header select-all, gridlines. |
 | 4 | Pagination with fixed scroll | `paginator=true`, `rows=2`, `rowsPerPageOptions=[2,5,10]`, `scrollable=true`, `scrollHeight='260px'` | Paginator, rows per page selector, fixed-height scrolling. |
@@ -353,7 +374,7 @@ Based on PrimeNG 20.1.0 (Angular 20). Documentation: https://primeng.org/treetab
 <td>columnResizeMode</td><td>Whether the overall table width should change on column resize: 'fit' or 'expand'. Default 'fit'</td>
 </tr>
 <tr>
-<td>columns</td><td>Array of column objects. Column shape: {header: 'Name', field: 'name', sortable: true, resizable: true, reorderable: false, width: '200px' or '54%', type: null or 'checkbox' or 'actions', actions: [{label, title, icon, iconEnd, iconSize, iconEndSize, iconSlot, iconEndSlot, color, fill, size, shape, expand, strong, disabled}]}</td>
+<td>columns</td><td>Array of column objects. Column shape: {header: 'Name', field: 'name', sortable: true, resizable: true, reorderable: false, width: '200px' or '54%', type: null or 'checkbox' or 'actions', actions: [{label, title, icon, iconEnd, iconSize, iconEndSize, iconSlot, iconEndSlot, color, fill, size, shape, expand, strong, disabled, visible: (node, rowData) => boolean}]}</td>
 </tr>
 <tr>
 <td>compareSelectionBy</td><td>Algorithm to define if a row is selected: 'equals' or 'deepEquals'. Default 'deepEquals'</td>

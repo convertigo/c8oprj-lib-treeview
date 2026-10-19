@@ -78,6 +78,36 @@ title: testTreeTable
                 page.local.lastAction = label + '' — '' + (event?.rowData?.name || event?.node?.data?.name || '''');
                 return Promise.resolve({ok: true});'
         comment: Records the clicked action (label or title fallback) and target row into page locals
+  ↓VisibleActionsTitle [ngx.components.UIDynamicElement-1792418068440]: 
+    beanData: '{"ionBean":"TextItem"}'
+    comment: Title of the conditional action buttons use case
+    tagName: h2
+    ↓Text [ngx.components.UIText-1792418068442]: 
+      comment: Conditional actions use case label
+      textValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: plain:2. Boutons d’action visibles selon le type de ligne
+  ↓UseSharedVisibleActions [ngx.components.UIUseShared-1792418070148]: 
+    comment: 'Use case: action buttons hidden per row through action.visible(node, rowData)'
+    identifier: ttVisibleActions
+    sharedcomponent: lib_TreeTable.Application.NgxApp.treeTable
+    ↓value [ngx.components.UIUseVariable-1792418071902]: 
+      comment: Hierarchical demo data
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.treeData
+    ↓columns [ngx.components.UIUseVariable-1792418071904]: 
+      comment: Demo columns whose actions use visible predicates (folder vs file)
+      varValue: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.ngx.components.MobileSmartSourceType
+          - MobileSmartSourceType: script:this?.local?.visibleActionsColumns
+    ↓ActionClickEvent [ngx.components.UIControlEvent-1792418292378]: 
+      attrName: (ActionClick)
+      comment: Handles ActionClick emitted by the treeTable shared component
+      eventName: (ActionClick)
   ↓Case1Title [ngx.components.UIDynamicElement-1790922844100]: 
     beanData: '{"ionBean":"TextItem"}'
     comment: Title of use case 1
@@ -371,8 +401,18 @@ title: testTreeTable
             				{ label: ''Défiler'', icon: ''play-outline'', iconEnd: ''chevron-forward-outline'', color: ''tertiary'', fill: ''solid'' }
             			] }
             		];
+            		page.local.visibleActionsColumns = [
+            			{ header: ''Nom'', field: ''name'', width: ''25%'' },
+            			{ header: ''Taille'', field: ''size'', width: ''15%'' },
+            			{ header: ''Type'', field: ''type'', width: ''15%'' },
+            			{ header: ''Actions'', field: ''actions'', type: ''actions'', sortable: false, width: ''45%'', actions: [
+            				{ label: ''Ouvrir'', icon: ''folder-open-outline'', color: ''primary'', fill: ''solid'', visible: (node, rowData) => rowData?.type === ''folder'' },
+            				{ label: ''Voir'', icon: ''eye-outline'', color: ''secondary'', fill: ''outline'', visible: (node, rowData) => rowData?.type !== ''folder'' },
+            				{ label: ''Supprimer'', icon: ''trash-outline'', color: ''danger'', fill: ''solid'' }
+            			] }
+            		];
             		page.local.emptyData = [];
             		page.local.lastAction = '''';
             		return Promise.resolve({ ok: true });
             '
-    comment: Initializes demo data with configurable action button types and column widths (col.width) so the actions column can fit all buttons on one line
+    comment: Initializes demo data with configurable action button types, column widths (col.width) and per-row action visibility (action.visible) so the actions column can fit all buttons on one line
